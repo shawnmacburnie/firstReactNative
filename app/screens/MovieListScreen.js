@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import LoadingView from '../components/LoadingView';
 import styles from '../stylesheets/MovieListScreen';
+import ViewContainer from '../components/ViewContainer';
+import StatusBarBackground from '../components/StatusBarBackground';
 
 var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
 
@@ -44,11 +46,14 @@ class MovieListScreen extends Component {
       return (<LoadingView />);
     }
     return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this.renderMovie.bind(this)}
-        style={styles.listView}
-      />
+      <ViewContainer>
+        <StatusBarBackground />
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderMovie.bind(this)}
+          style={styles.listView}
+        />
+      </ViewContainer>
     );
   }
   goToMovieScreen() {
