@@ -4,6 +4,7 @@ import {View, Image, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewContainer from '../components/ViewContainer';
 import StatusBarBackground from '../components/StatusBarBackground';
+import styles from '../stylesheets/MovieScreen';
 
 class MovieScreen extends Component {
 
@@ -51,32 +52,5 @@ class MovieScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  contentContainer: {
-    padding: 10,
-    paddingTop: 50,
-  },
-  imageContainer: {
-    flex:1,
-    flexDirection: 'row',
-    backgroundColor: 'black',
-    height: 101,
-  },
-  center: {
-    flex:1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  image: {
-    height: 101,
-    width: 73,
-  },
-  closeButton: {
-    color: 'white',
-  },
-  title: {
-    fontWeight: 'bold',
-  },
-});
 
 module.exports = MovieScreen;
