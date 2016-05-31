@@ -41,7 +41,6 @@ class MovieListScreen extends Component {
       .done();
   }
   render() {
-    console.log(this.props.goTo);
     if (!this.state.loaded) {
       return (<LoadingView />);
     }
@@ -56,13 +55,15 @@ class MovieListScreen extends Component {
       </ViewContainer>
     );
   }
-  goToMovieScreen() {
-    this.props.goTo('MovieScreen');
+  goToMovieScreen(movie) {
+    this.props.goTo('MovieScreen', {
+      movie: movie,
+    });
   }
 
   renderMovie(movie) {
     return (
-      <TouchableOpacity onPress={this.goToMovieScreen.bind(this)}>
+      <TouchableOpacity onPress={()=> this.goToMovieScreen.bind(this)(movie)}>
         <View style={styles.container}>
           <Image
             source={{uri: movie.posters.thumbnail}}
