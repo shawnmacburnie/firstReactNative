@@ -1,5 +1,5 @@
 'use strict';
-import {StyleSheet} from 'react-native';
+import StyleSheet from '../StyleSheet';
 
 const styles = StyleSheet.create({
   contentContainer: {

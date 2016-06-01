@@ -8,23 +8,30 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  DrawerLayoutAndroid
 } from 'react-native';
+import MainNavigator from './app/navigators/MainNavigator';
 
 class reactPageTutorial extends Component {
-  render() {
+  navigationView() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
+      <View style={{flex: 1, backgroundColor: '#fff'}}>
+        <Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>
+          Im in the Drawer
         </Text>
       </View>
+    );
+  }
+
+  render() {
+    return (
+      <DrawerLayoutAndroid
+  drawerWidth={300}
+  drawerPosition={DrawerLayoutAndroid.positions.Left}
+  renderNavigationView={this.navigationView}>
+    <MainNavigator />
+</DrawerLayoutAndroid>
     );
   }
 }

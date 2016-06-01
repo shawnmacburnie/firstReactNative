@@ -1,7 +1,8 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
+import StyleSheet from '../StyleSheet';
 
 class StatusBarBackground extends Component {
   render() {
@@ -11,11 +12,13 @@ class StatusBarBackground extends Component {
     );
   }
 }
-
+console.log(StyleSheet);
 const styles = StyleSheet.create({
   statusBarBackground: {
-    height: 20,
-    backgroundColor: "white"
+    ios: {
+      height: 20,
+      backgroundColor: 'white'
+    },
   }
 });
 
