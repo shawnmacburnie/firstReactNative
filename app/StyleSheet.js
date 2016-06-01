@@ -1,5 +1,5 @@
+'use strict';
 import {StyleSheet, Platform} from 'react-native';
-
 
 function create(styles) {
     var platformStyles = {};

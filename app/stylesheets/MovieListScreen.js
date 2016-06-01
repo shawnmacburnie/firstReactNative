@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
   rightContainer: {
     flex:1,
@@ -25,7 +24,6 @@ const styles = StyleSheet.create({
   },
   listView: {
     padding:20,
-    backgroundColor: '#F5FCFF',
   },
 });
 

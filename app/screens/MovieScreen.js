@@ -3,16 +3,22 @@ import React, { Component } from 'react';
 import {View, Image, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewContainer from '../components/ViewContainer';
-import StatusBarBackground from '../components/StatusBarBackground';
+import StatusBar from '../components/StatusBar';
 import styles from '../stylesheets/MovieScreen';
 
 class MovieScreen extends Component {
 
+  componentDidMount() {
+    this.oldTitle = this.props.setPageTitle(this.props.params.movie.title);
+  }
+
+  componentWillUnmount() {
+    this.props.setPageTitle(this.oldTitle);
+  }
+
   render() {
-    console.log(this.props.params.movie);
     return (
       <ViewContainer style={{backgroundColor: 'cyan'}}>
-        <StatusBarBackground />
         <View style={{height: 101}}>
           <View style={styles.imageContainer}>
             <TouchableOpacity onPress={this.props.goBack}>

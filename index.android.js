@@ -12,26 +12,14 @@ import {
   DrawerLayoutAndroid
 } from 'react-native';
 import MainNavigator from './app/navigators/MainNavigator';
+import TabBar from './app/components/TabBar';
 
 class reactPageTutorial extends Component {
-  navigationView() {
-    return (
-      <View style={{flex: 1, backgroundColor: '#fff'}}>
-        <Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>
-          Im in the Drawer
-        </Text>
-      </View>
-    );
-  }
-
   render() {
     return (
-      <DrawerLayoutAndroid
-  drawerWidth={300}
-  drawerPosition={DrawerLayoutAndroid.positions.Left}
-  renderNavigationView={this.navigationView}>
-    <MainNavigator />
-</DrawerLayoutAndroid>
+      <TabBar>
+        <MainNavigator />
+      </TabBar>
     );
   }
 }

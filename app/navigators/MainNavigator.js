@@ -5,11 +5,22 @@ import {
 } from 'react-native';
 import MovieListScreen from '../screens/MovieListScreen';
 import MovieScreen from '../screens/MovieScreen';
+import ViewContainer from '../components/ViewContainer';
+import StatusBar from '../components/StatusBar';
 
 class MainNavigator extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pageTitle: '',
+    };
+  }
 
   renderScene(route, navigator) {
-    var goBack = () => {navigator.pop()};
+    var goBack = () => {
+      navigator.pop();
+      console.log(navigator);
+    };
     var goTo = (ident, params) => {navigator.push({ident, params})}
     if (route.ident) {
       switch (route.ident) {
@@ -18,7 +29,8 @@ class MainNavigator extends Component {
             <MovieListScreen
               params={route.params}
               goBack={goBack}
-              goTo = {goTo}
+              goTo={goTo}
+              setPageTitle={this.setPageTitle.bind(this)}
             />
           );
         case 'MovieScreen':
@@ -27,6 +39,8 @@ class MainNavigator extends Component {
               params={route.params}
               goBack={goBack}
               goTo = {goTo}
+              pageTitle = 'Movies Select'
+              setPageTitle={this.setPageTitle.bind(this)}
             />
           );
         default:
@@ -39,13 +53,24 @@ class MainNavigator extends Component {
     }
   }
 
+  setPageTitle(title: string) {
+    var oldTitle = this.state.pageTitle
+    this.setState({
+      pageTitle: title
+    });
+    return oldTitle;
+  }
+
   render() {
     return (
-      <Navigator
-        initialRoute={{ident: 'MovieListView'}}
-        renderScene={this.renderScene}
-        configureScene={()=>Navigator.SceneConfigs.FloatFromBottom}
-      />
+      <ViewContainer>
+        <StatusBar pageTitle={this.state.pageTitle} />
+          <Navigator
+            initialRoute={{ident: 'MovieListView'}}
+            renderScene={this.renderScene.bind(this)}
+            configureScene={()=>Navigator.SceneConfigs.FloatFromBottom}
+          />
+      </ViewContainer>
     );
   }
 }

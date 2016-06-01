@@ -10,7 +10,7 @@ import {
 import LoadingView from '../components/LoadingView';
 import styles from '../stylesheets/MovieListScreen';
 import ViewContainer from '../components/ViewContainer';
-import StatusBarBackground from '../components/StatusBarBackground';
+import StatusBar from '../components/StatusBar';
 
 var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
 
@@ -27,6 +27,7 @@ class MovieListScreen extends Component {
   // This will only be called when the component is loaded and only once
   componentDidMount() {
     this.fetchData();
+    var x = this.props.setPageTitle('Movie List');
   }
 
   fetchData() {
@@ -46,7 +47,6 @@ class MovieListScreen extends Component {
     }
     return (
       <ViewContainer>
-        <StatusBarBackground />
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderMovie.bind(this)}
