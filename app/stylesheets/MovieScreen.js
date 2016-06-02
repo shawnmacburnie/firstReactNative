@@ -21,9 +21,6 @@ const styles = StyleSheet.create({
     height: 101,
     width: 73,
   },
-  closeButton: {
-    color: 'white',
-  },
   title: {
     fontWeight: 'bold',
   },

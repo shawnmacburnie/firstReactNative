@@ -8,22 +8,12 @@ import styles from '../stylesheets/MovieScreen';
 
 class MovieScreen extends Component {
 
-  componentDidMount() {
-    this.oldTitle = this.props.setPageTitle(this.props.params.movie.title);
-  }
-
-  componentWillUnmount() {
-    this.props.setPageTitle(this.oldTitle);
-  }
 
   render() {
     return (
       <ViewContainer style={{backgroundColor: 'cyan'}}>
         <View style={{height: 101}}>
           <View style={styles.imageContainer}>
-            <TouchableOpacity onPress={this.props.goBack}>
-              <Icon size={30} name="times" style={styles.closeButton}/>
-            </TouchableOpacity>
             <View style={styles.center}>
               <Image
                 source={{uri: this.props.params.movie.posters.thumbnail}}

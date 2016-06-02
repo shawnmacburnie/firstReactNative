@@ -1,47 +1,45 @@
 
 import React, { Component } from 'react';
 import {
+  View,
+  Text,
   Navigator,
 } from 'react-native';
 import MovieListScreen from '../screens/MovieListScreen';
 import MovieScreen from '../screens/MovieScreen';
 import ViewContainer from '../components/ViewContainer';
 import StatusBar from '../components/StatusBar';
+import Stack from '../Stack';
 
 class MainNavigator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pageTitle: '',
+      titleStack: new Stack('Movies'),
     };
   }
 
   renderScene(route, navigator) {
-    var goBack = () => {
-      navigator.pop();
-      console.log(navigator);
-    };
-    var goTo = (ident, params) => {navigator.push({ident, params})}
+    if(!this.navigator) {
+      this.navigator = navigator;
+    }
     if (route.ident) {
       switch (route.ident) {
         case 'MovieListView':
           return (
-            <MovieListScreen
-              params={route.params}
-              goBack={goBack}
-              goTo={goTo}
-              setPageTitle={this.setPageTitle.bind(this)}
-            />
+              <MovieListScreen
+                params={route.params}
+                goBack={this.goBack.bind(this)}
+                goTo={this.goTo.bind(this)}
+              />
           );
         case 'MovieScreen':
           return (
-            <MovieScreen
-              params={route.params}
-              goBack={goBack}
-              goTo = {goTo}
-              pageTitle = 'Movies Select'
-              setPageTitle={this.setPageTitle.bind(this)}
-            />
+              <MovieScreen
+                params={route.params}
+                goBack={this.goBack.bind(this)}
+                goTo={this.goTo.bind(this)}
+              />
           );
         default:
           return (
@@ -53,18 +51,33 @@ class MainNavigator extends Component {
     }
   }
 
-  setPageTitle(title: string) {
-    var oldTitle = this.state.pageTitle
-    this.setState({
-      pageTitle: title
-    });
-    return oldTitle;
+  goTo(ident, params) {
+    if (this.navigator) {
+      this.setState({
+        titleStack: this.state.titleStack.push(params.title)
+      });
+      this.navigator.push({ident, params});
+    }
+  }
+
+  goBack() {
+    if(this.navigator) {
+      this.setState({
+        titleStack: this.state.titleStack.pop()
+      });
+      this.navigator.pop();
+    }
   }
 
   render() {
     return (
       <ViewContainer>
-        <StatusBar pageTitle={this.state.pageTitle} />
+        <StatusBar
+          title={this.state.titleStack}
+          onGoBack={this.goBack.bind(this)}
+          onGoNext={this.goTo.bind(this)}
+        />
+
           <Navigator
             initialRoute={{ident: 'MovieListView'}}
             renderScene={this.renderScene.bind(this)}
@@ -74,5 +87,6 @@ class MainNavigator extends Component {
     );
   }
 }
+
 
 module.exports = MainNavigator;

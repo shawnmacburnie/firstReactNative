@@ -27,7 +27,6 @@ class MovieListScreen extends Component {
   // This will only be called when the component is loaded and only once
   componentDidMount() {
     this.fetchData();
-    var x = this.props.setPageTitle('Movie List');
   }
 
   fetchData() {
@@ -58,6 +57,7 @@ class MovieListScreen extends Component {
   goToMovieScreen(movie) {
     this.props.goTo('MovieScreen', {
       movie: movie,
+      title: movie.title,
     });
   }
 
